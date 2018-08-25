@@ -200,8 +200,10 @@
     <Compile Include="Controllers\CropController.cs" />
     <Compile Include="Controllers\FarmController.cs" />
     <Compile Include="Controllers\FarmerController.cs" />
+    <Compile Include="Controllers\FarmerFlowController.cs" />
     <Compile Include="Controllers\FarmersCropController.cs" />
     <Compile Include="Controllers\InvestorController.cs" />
+    <Compile Include="Controllers\InvestorFlowController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\InvestmentController.cs" />
     <Compile Include="EF\AgriDb.Context.cs">

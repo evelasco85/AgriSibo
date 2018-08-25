@@ -37,6 +37,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="RemainingInvestmentFunds" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="FarmersCrop">
           <Key>
@@ -79,6 +80,27 @@
           <Property Name="DefaultReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="AcceptInvestmentApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="InvestorId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddFundsToFarmer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fundsToAdd" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="CompleteProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InitiateProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SubmitInvestmentApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InvestorId" Type="int" Mode="In" />
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="InvestedAmount" Type="decimal" Mode="In" />
+          <Parameter Name="ExpectedReturnRate" Type="decimal" Mode="In" />
+          <Parameter Name="ExpectedReturnAmount" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="AgriSiboModelStoreContainer">
           <EntitySet Name="ApiSecurity" EntityType="Self.ApiSecurity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crop" EntityType="Self.Crop" Schema="dbo" store:Type="Tables" />
@@ -102,6 +124,27 @@
           <EntitySet Name="Investments" EntityType="AgriSiboModel.Investment" />
           <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
           <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
+          <FunctionImport Name="AcceptInvestmentApplication">
+            <Parameter Name="ProjectId" Mode="In" Type="Int32" />
+            <Parameter Name="InvestorId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddFundsToFarmer">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fundsToAdd" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="CompleteProject">
+            <Parameter Name="ProjectId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InitiateProject">
+            <Parameter Name="ProjectId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SubmitInvestmentApplication">
+            <Parameter Name="InvestorId" Mode="In" Type="Int32" />
+            <Parameter Name="ProjectId" Mode="In" Type="Int32" />
+            <Parameter Name="InvestedAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="ExpectedReturnRate" Mode="In" Type="Decimal" />
+            <Parameter Name="ExpectedReturnAmount" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ApiSecurity">
           <Key>
@@ -135,6 +178,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="FarmersCrop">
           <Key>
@@ -214,6 +258,7 @@
           <EntitySetMapping Name="Farmers">
             <EntityTypeMapping TypeName="AgriSiboModel.Farmer">
               <MappingFragment StoreEntitySet="Farmer">
+                <ScalarProperty Name="RemainingInvestmentFunds" ColumnName="RemainingInvestmentFunds" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -264,6 +309,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AcceptInvestmentApplication" FunctionName="AgriSiboModel.Store.AcceptInvestmentApplication" />
+          <FunctionImportMapping FunctionImportName="AddFundsToFarmer" FunctionName="AgriSiboModel.Store.AddFundsToFarmer" />
+          <FunctionImportMapping FunctionImportName="CompleteProject" FunctionName="AgriSiboModel.Store.CompleteProject" />
+          <FunctionImportMapping FunctionImportName="InitiateProject" FunctionName="AgriSiboModel.Store.InitiateProject" />
+          <FunctionImportMapping FunctionImportName="SubmitInvestmentApplication" FunctionName="AgriSiboModel.Store.SubmitInvestmentApplication" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

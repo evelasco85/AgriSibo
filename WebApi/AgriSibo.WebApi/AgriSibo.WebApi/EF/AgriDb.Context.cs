@@ -12,6 +12,8 @@ namespace AgriSibo.WebApi.EF
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AgriSiboEntities : DbContext
     {
@@ -33,5 +35,74 @@ namespace AgriSibo.WebApi.EF
         public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<Investor> Investors { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
+    
+        public virtual int AcceptInvestmentApplication(Nullable<int> projectId, Nullable<int> investorId)
+        {
+            var projectIdParameter = projectId.HasValue ?
+                new ObjectParameter("ProjectId", projectId) :
+                new ObjectParameter("ProjectId", typeof(int));
+    
+            var investorIdParameter = investorId.HasValue ?
+                new ObjectParameter("InvestorId", investorId) :
+                new ObjectParameter("InvestorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AcceptInvestmentApplication", projectIdParameter, investorIdParameter);
+        }
+    
+        public virtual int AddFundsToFarmer(Nullable<int> id, Nullable<decimal> fundsToAdd)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var fundsToAddParameter = fundsToAdd.HasValue ?
+                new ObjectParameter("fundsToAdd", fundsToAdd) :
+                new ObjectParameter("fundsToAdd", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFundsToFarmer", idParameter, fundsToAddParameter);
+        }
+    
+        public virtual int CompleteProject(Nullable<int> projectId)
+        {
+            var projectIdParameter = projectId.HasValue ?
+                new ObjectParameter("ProjectId", projectId) :
+                new ObjectParameter("ProjectId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompleteProject", projectIdParameter);
+        }
+    
+        public virtual int InitiateProject(Nullable<int> projectId)
+        {
+            var projectIdParameter = projectId.HasValue ?
+                new ObjectParameter("ProjectId", projectId) :
+                new ObjectParameter("ProjectId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InitiateProject", projectIdParameter);
+        }
+    
+        public virtual int SubmitInvestmentApplication(Nullable<int> investorId, Nullable<int> projectId, Nullable<decimal> investedAmount, Nullable<decimal> expectedReturnRate, Nullable<decimal> expectedReturnAmount)
+        {
+            var investorIdParameter = investorId.HasValue ?
+                new ObjectParameter("InvestorId", investorId) :
+                new ObjectParameter("InvestorId", typeof(int));
+    
+            var projectIdParameter = projectId.HasValue ?
+                new ObjectParameter("ProjectId", projectId) :
+                new ObjectParameter("ProjectId", typeof(int));
+    
+            var investedAmountParameter = investedAmount.HasValue ?
+                new ObjectParameter("InvestedAmount", investedAmount) :
+                new ObjectParameter("InvestedAmount", typeof(decimal));
+    
+            var expectedReturnRateParameter = expectedReturnRate.HasValue ?
+                new ObjectParameter("ExpectedReturnRate", expectedReturnRate) :
+                new ObjectParameter("ExpectedReturnRate", typeof(decimal));
+    
+            var expectedReturnAmountParameter = expectedReturnAmount.HasValue ?
+                new ObjectParameter("ExpectedReturnAmount", expectedReturnAmount) :
+                new ObjectParameter("ExpectedReturnAmount", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitInvestmentApplication", investorIdParameter, projectIdParameter, investedAmountParameter, expectedReturnRateParameter, expectedReturnAmountParameter);
+        }
     }
 }
