@@ -6,14 +6,14 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8035275dcf2a42a4b147ec3c554462bc" Name="Diagram1" >
         <EntityTypeShape EntityType="AgriSiboModel.ApiSecurity" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Farmer" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.FarmersCrop" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Investor" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Project" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Crop" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Farm" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.HistoryInvestment" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.OpenInvestment" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Crop" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Farm" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Farmer" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.FarmersCrop" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.HistoryInvestment" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Investor" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.OpenInvestment" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Project" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="AgriSiboModel.WorkInvestment" Width="1.5" PointX="2.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
