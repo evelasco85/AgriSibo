@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AgriSiboModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApiSecurity">
+          <Key>
+            <PropertyRef Name="FarmerId" />
+            <PropertyRef Name="InvestorId" />
+          </Key>
+          <Property Name="FarmerId" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="AccessToken" Type="char" MaxLength="500" Nullable="false" />
+          <Property Name="RefreshToken" Type="char" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Farm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FarmerId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+          <Property Name="Address" Type="char" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Farmer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FarmersCrop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FarmId" Type="int" Nullable="false" />
+          <Property Name="CropId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+          <Property Name="RemainingInvestmentFunds" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FarmersCropId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+          <Property Name="EstimatedBudget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CommittedDate" Type="datetime" Nullable="false" />
+          <Property Name="DefaultReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DefaultReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AgriSiboModelStoreContainer">
+          <EntitySet Name="ApiSecurity" EntityType="Self.ApiSecurity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Crop" EntityType="Self.Crop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farm" EntityType="Self.Farm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer" EntityType="Self.Farmer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FarmersCrop" EntityType="Self.FarmersCrop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investment" EntityType="Self.Investment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investor" EntityType="Self.Investor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgriSiboModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AgriSiboEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ApiSecurities" EntityType="AgriSiboModel.ApiSecurity" />
+          <EntitySet Name="Crops" EntityType="AgriSiboModel.Crop" />
+          <EntitySet Name="Farms" EntityType="AgriSiboModel.Farm" />
+          <EntitySet Name="Farmers" EntityType="AgriSiboModel.Farmer" />
+          <EntitySet Name="FarmersCrops" EntityType="AgriSiboModel.FarmersCrop" />
+          <EntitySet Name="Investments" EntityType="AgriSiboModel.Investment" />
+          <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
+          <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
+        </EntityContainer>
+        <EntityType Name="ApiSecurity">
+          <Key>
+            <PropertyRef Name="FarmerId" />
+            <PropertyRef Name="InvestorId" />
+          </Key>
+          <Property Name="FarmerId" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="RefreshToken" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Farm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FarmerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="2000" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Farmer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FarmersCrop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FarmId" Type="Int32" Nullable="false" />
+          <Property Name="CropId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FarmersCropId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="EstimatedBudget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CommittedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DefaultReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DefaultReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgriSiboModelStoreContainer" CdmEntityContainer="AgriSiboEntities" >
+          <EntitySetMapping Name="ApiSecurities">
+            <EntityTypeMapping TypeName="AgriSiboModel.ApiSecurity">
+              <MappingFragment StoreEntitySet="ApiSecurity">
+                <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Crops">
+            <EntityTypeMapping TypeName="AgriSiboModel.Crop">
+              <MappingFragment StoreEntitySet="Crop">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farms">
+            <EntityTypeMapping TypeName="AgriSiboModel.Farm">
+              <MappingFragment StoreEntitySet="Farm">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmers">
+            <EntityTypeMapping TypeName="AgriSiboModel.Farmer">
+              <MappingFragment StoreEntitySet="Farmer">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FarmersCrops">
+            <EntityTypeMapping TypeName="AgriSiboModel.FarmersCrop">
+              <MappingFragment StoreEntitySet="FarmersCrop">
+                <ScalarProperty Name="CropId" ColumnName="CropId" />
+                <ScalarProperty Name="FarmId" ColumnName="FarmId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investments">
+            <EntityTypeMapping TypeName="AgriSiboModel.Investment">
+              <MappingFragment StoreEntitySet="Investment">
+                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
+                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
+                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
+                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investors">
+            <EntityTypeMapping TypeName="AgriSiboModel.Investor">
+              <MappingFragment StoreEntitySet="Investor">
+                <ScalarProperty Name="RemainingInvestmentFunds" ColumnName="RemainingInvestmentFunds" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="AgriSiboModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DefaultReturnAmount" ColumnName="DefaultReturnAmount" />
+                <ScalarProperty Name="DefaultReturnRate" ColumnName="DefaultReturnRate" />
+                <ScalarProperty Name="CommittedDate" ColumnName="CommittedDate" />
+                <ScalarProperty Name="EstimatedBudget" ColumnName="EstimatedBudget" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FarmersCropId" ColumnName="FarmersCropId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
