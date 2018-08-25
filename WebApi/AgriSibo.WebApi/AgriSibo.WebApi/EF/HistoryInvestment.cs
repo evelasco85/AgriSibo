@@ -12,14 +12,14 @@ namespace AgriSibo.WebApi.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class HistoryInvestment
     {
-        public int Id { get; set; }
-        public int FarmersCropId { get; set; }
-        public string Name { get; set; }
-        public decimal EstimatedBudget { get; set; }
-        public System.DateTime CommittedDate { get; set; }
-        public decimal DefaultReturnRate { get; set; }
-        public decimal DefaultReturnAmount { get; set; }
+        public int id { get; set; }
+        public int InvestorId { get; set; }
+        public int ProjectId { get; set; }
+        public decimal InvestedAmount { get; set; }
+        public decimal ExpectedReturnRate { get; set; }
+        public decimal ExpectedReturnAmount { get; set; }
+        public bool AcceptedByFarmer { get; set; }
     }
 }

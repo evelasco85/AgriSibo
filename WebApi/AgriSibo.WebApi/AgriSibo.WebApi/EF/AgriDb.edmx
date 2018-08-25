@@ -52,6 +52,26 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="FarmId" Type="int" Nullable="false" />
           <Property Name="CropId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AgriSibo.dbo.HistoryInvestment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HistoryInvestment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Investor">
           <Key>
             <PropertyRef Name="Id" />
@@ -59,6 +79,26 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
           <Property Name="RemainingInvestmentFunds" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AgriSibo.dbo.OpenInvestment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OpenInvestment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -69,6 +109,28 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
           <Property Name="EstimatedBudget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CommittedDate" Type="datetime" Nullable="false" />
+          <Property Name="DefaultReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DefaultReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AgriSibo.dbo.WorkInvestment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WorkInvestment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="AgriSiboModelStoreContainer">
           <EntitySet Name="ApiSecurity" EntityType="Self.ApiSecurity" Schema="dbo" store:Type="Tables" />
@@ -90,6 +152,39 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
     [Farm].[Address] AS [Address]
     FROM [dbo].[Farm] AS [Farm]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="HistoryInvestment" EntityType="Self.HistoryInvestment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HistoryInvestment].[id] AS [id], 
+    [HistoryInvestment].[InvestorId] AS [InvestorId], 
+    [HistoryInvestment].[ProjectId] AS [ProjectId], 
+    [HistoryInvestment].[InvestedAmount] AS [InvestedAmount], 
+    [HistoryInvestment].[ExpectedReturnRate] AS [ExpectedReturnRate], 
+    [HistoryInvestment].[ExpectedReturnAmount] AS [ExpectedReturnAmount], 
+    [HistoryInvestment].[AcceptedByFarmer] AS [AcceptedByFarmer]
+    FROM [dbo].[HistoryInvestment] AS [HistoryInvestment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OpenInvestment" EntityType="Self.OpenInvestment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OpenInvestment].[id] AS [id], 
+    [OpenInvestment].[InvestorId] AS [InvestorId], 
+    [OpenInvestment].[ProjectId] AS [ProjectId], 
+    [OpenInvestment].[InvestedAmount] AS [InvestedAmount], 
+    [OpenInvestment].[ExpectedReturnRate] AS [ExpectedReturnRate], 
+    [OpenInvestment].[ExpectedReturnAmount] AS [ExpectedReturnAmount], 
+    [OpenInvestment].[AcceptedByFarmer] AS [AcceptedByFarmer]
+    FROM [dbo].[OpenInvestment] AS [OpenInvestment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WorkInvestment" EntityType="Self.WorkInvestment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WorkInvestment].[id] AS [id], 
+    [WorkInvestment].[InvestorId] AS [InvestorId], 
+    [WorkInvestment].[ProjectId] AS [ProjectId], 
+    [WorkInvestment].[InvestedAmount] AS [InvestedAmount], 
+    [WorkInvestment].[ExpectedReturnRate] AS [ExpectedReturnRate], 
+    [WorkInvestment].[ExpectedReturnAmount] AS [ExpectedReturnAmount], 
+    [WorkInvestment].[AcceptedByFarmer] AS [AcceptedByFarmer]
+    FROM [dbo].[WorkInvestment] AS [WorkInvestment]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -99,10 +194,13 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <EntitySet Name="ApiSecurities" EntityType="AgriSiboModel.ApiSecurity" />
           <EntitySet Name="Farmers" EntityType="AgriSiboModel.Farmer" />
           <EntitySet Name="FarmersCrops" EntityType="AgriSiboModel.FarmersCrop" />
+          <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
           <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
           <EntitySet Name="Crops" EntityType="AgriSiboModel.Crop" />
           <EntitySet Name="Farms" EntityType="AgriSiboModel.Farm" />
-          <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
+          <EntitySet Name="HistoryInvestments" EntityType="AgriSiboModel.HistoryInvestment" />
+          <EntitySet Name="OpenInvestments" EntityType="AgriSiboModel.OpenInvestment" />
+          <EntitySet Name="WorkInvestments" EntityType="AgriSiboModel.WorkInvestment" />
         </EntityContainer>
         <EntityType Name="ApiSecurity">
           <Key>
@@ -127,6 +225,14 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="FarmId" Type="Int32" Nullable="false" />
           <Property Name="CropId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
@@ -136,6 +242,8 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="EstimatedBudget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="CommittedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DefaultReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DefaultReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Crop">
           <Key>
@@ -157,13 +265,59 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="2000" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="Investor">
+        <EntityType Name="HistoryInvestment">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
-          <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OpenInvestment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkInvestment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="InvestorId" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="InvestedAmount" />
+            <PropertyRef Name="ExpectedReturnRate" />
+            <PropertyRef Name="ExpectedReturnAmount" />
+            <PropertyRef Name="AcceptedByFarmer" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -197,9 +351,20 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Investors">
+            <EntityTypeMapping TypeName="AgriSiboModel.Investor">
+              <MappingFragment StoreEntitySet="Investor">
+                <ScalarProperty Name="RemainingInvestmentFunds" ColumnName="RemainingInvestmentFunds" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="AgriSiboModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="DefaultReturnAmount" ColumnName="DefaultReturnAmount" />
+                <ScalarProperty Name="DefaultReturnRate" ColumnName="DefaultReturnRate" />
                 <ScalarProperty Name="CommittedDate" ColumnName="CommittedDate" />
                 <ScalarProperty Name="EstimatedBudget" ColumnName="EstimatedBudget" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -226,12 +391,42 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Investors">
-            <EntityTypeMapping TypeName="AgriSiboModel.Investor">
-              <MappingFragment StoreEntitySet="Investor">
-                <ScalarProperty Name="RemainingInvestmentFunds" ColumnName="RemainingInvestmentFunds" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="HistoryInvestments">
+            <EntityTypeMapping TypeName="AgriSiboModel.HistoryInvestment">
+              <MappingFragment StoreEntitySet="HistoryInvestment">
+                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
+                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
+                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
+                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenInvestments">
+            <EntityTypeMapping TypeName="AgriSiboModel.OpenInvestment">
+              <MappingFragment StoreEntitySet="OpenInvestment">
+                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
+                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
+                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
+                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkInvestments">
+            <EntityTypeMapping TypeName="AgriSiboModel.WorkInvestment">
+              <MappingFragment StoreEntitySet="WorkInvestment">
+                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
+                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
+                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
+                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
