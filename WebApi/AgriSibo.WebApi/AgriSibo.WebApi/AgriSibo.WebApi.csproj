@@ -197,9 +197,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CropController.cs" />
     <Compile Include="Controllers\FarmController.cs" />
     <Compile Include="Controllers\FarmerController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FarmersCropController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="EF\AgriDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,10 +220,10 @@
     <Compile Include="EF\ApiSecurity.cs">
       <DependentUpon>AgriDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Farm.cs">
+    <Compile Include="EF\Crop.cs">
       <DependentUpon>AgriDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\FarmCrop.cs">
+    <Compile Include="EF\Farm.cs">
       <DependentUpon>AgriDb.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Farmer.cs">

@@ -14,6 +14,16 @@
           <Property Name="RefreshToken" Type="char" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'AgriSibo.dbo.Crop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Farm">
           <Key>
@@ -26,16 +36,6 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="FarmerId" Type="int" Nullable="false" />
           <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
           <Property Name="Address" Type="char" MaxLength="2000" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="FarmCrop">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="Farmer">
           <Key>
@@ -50,14 +50,14 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FarmId" Type="int" Nullable="false" />
-          <Property Name="FarmCropId" Type="int" Nullable="false" />
+          <Property Name="CropId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FarmCropId" Type="int" Nullable="false" />
+          <Property Name="FarmersCropId" Type="int" Nullable="false" />
           <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
           <Property Name="EstimatedBudget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CommittedDate" Type="datetime" Nullable="false" />
@@ -67,6 +67,12 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           <EntitySet Name="Farmer" EntityType="Self.Farmer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FarmersCrop" EntityType="Self.FarmersCrop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Crop" EntityType="Self.Crop" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Crop].[Id] AS [Id], 
+    [Crop].[Name] AS [Name]
+    FROM [dbo].[Crop] AS [Crop]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Farm" EntityType="Self.Farm" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Farm].[Id] AS [Id], 
@@ -74,12 +80,6 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
     [Farm].[Name] AS [Name], 
     [Farm].[Address] AS [Address]
     FROM [dbo].[Farm] AS [Farm]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FarmCrop" EntityType="Self.FarmCrop" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FarmCrop].[Id] AS [Id], 
-    [FarmCrop].[Name] AS [Name]
-    FROM [dbo].[FarmCrop] AS [FarmCrop]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -91,8 +91,8 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           <EntitySet Name="Farmers" EntityType="AgriSiboModel.Farmer" />
           <EntitySet Name="FarmersCrops" EntityType="AgriSiboModel.FarmersCrop" />
           <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
+          <EntitySet Name="Crops" EntityType="AgriSiboModel.Crop" />
           <EntitySet Name="Farms" EntityType="AgriSiboModel.Farm" />
-          <EntitySet Name="FarmCrops" EntityType="AgriSiboModel.FarmCrop" />
         </EntityContainer>
         <EntityType Name="ApiSecurity">
           <Key>
@@ -115,17 +115,25 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FarmId" Type="Int32" Nullable="false" />
-          <Property Name="FarmCropId" Type="Int32" Nullable="false" />
+          <Property Name="CropId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FarmCropId" Type="Int32" Nullable="false" />
+          <Property Name="FarmersCropId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="EstimatedBudget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="CommittedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Farm">
           <Key>
@@ -138,14 +146,6 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           <Property Name="FarmerId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="2000" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="FarmCrop">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -173,7 +173,7 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
           <EntitySetMapping Name="FarmersCrops">
             <EntityTypeMapping TypeName="AgriSiboModel.FarmersCrop">
               <MappingFragment StoreEntitySet="FarmersCrop">
-                <ScalarProperty Name="FarmCropId" ColumnName="FarmCropId" />
+                <ScalarProperty Name="CropId" ColumnName="CropId" />
                 <ScalarProperty Name="FarmId" ColumnName="FarmId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -185,7 +185,15 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
                 <ScalarProperty Name="CommittedDate" ColumnName="CommittedDate" />
                 <ScalarProperty Name="EstimatedBudget" ColumnName="EstimatedBudget" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FarmCropId" ColumnName="FarmCropId" />
+                <ScalarProperty Name="FarmersCropId" ColumnName="FarmersCropId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Crops">
+            <EntityTypeMapping TypeName="AgriSiboModel.Crop">
+              <MappingFragment StoreEntitySet="Crop">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -196,14 +204,6 @@ warning 6002: The table/view 'AgriSibo.dbo.FarmCrop' does not have a primary key
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FarmCrops">
-            <EntityTypeMapping TypeName="AgriSiboModel.FarmCrop">
-              <MappingFragment StoreEntitySet="FarmCrop">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

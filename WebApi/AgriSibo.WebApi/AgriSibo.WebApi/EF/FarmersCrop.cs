@@ -16,6 +16,6 @@ namespace AgriSibo.WebApi.EF
     {
         public int Id { get; set; }
         public int FarmId { get; set; }
-        public int FarmCropId { get; set; }
+        public int CropId { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace AgriSibo.WebApi.EF
     public partial class Project
     {
         public int Id { get; set; }
-        public int FarmCropId { get; set; }
+        public int FarmersCropId { get; set; }
         public string Name { get; set; }
         public decimal EstimatedBudget { get; set; }
         public System.DateTime CommittedDate { get; set; }

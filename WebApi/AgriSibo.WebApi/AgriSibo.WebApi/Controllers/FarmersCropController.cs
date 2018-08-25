@@ -9,43 +9,36 @@ using System.Web.Http;
 
 namespace AgriSibo.WebApi.Controllers
 {
-    public class FarmController : ApiController
+    public class FarmersCropController : ApiController
     {
-        // GET: api/Farm
-        public IEnumerable<Farm> Get()
+        // GET: api/FarmersCrop
+        public IEnumerable<FarmersCrop> Get()
         {
             return Data
                 .Entities
-                .Farms;
+                .FarmersCrops;
         }
 
-        [HttpGet, Route("api/FarmsByFarmerId")]
-        public IEnumerable<Farm> GetByFarmerId(int farmerId)
-        {
-            return Get()
-                .Where(farm => farm.FarmerId == farmerId);
-        }
-
-        // GET: api/Farm/5
-        public Farm Get(int id)
+        // GET: api/FarmersCrop/5
+        public FarmersCrop Get(int id)
         {
             return Data
                 .Entities
-                .Farms
-                .FirstOrDefault(farm => farm.Id == id);
+                .FarmersCrops
+                .FirstOrDefault(farmersCrop => farmersCrop.Id == id);
         }
 
-        //// POST: api/Farm
+        //// POST: api/FarmersCrop
         //public void Post([FromBody]string value)
         //{
         //}
 
-        //// PUT: api/Farm/5
+        //// PUT: api/FarmersCrop/5
         //public void Put(int id, [FromBody]string value)
         //{
         //}
 
-        //// DELETE: api/Farm/5
+        //// DELETE: api/FarmersCrop/5
         //public void Delete(int id)
         //{
         //}
