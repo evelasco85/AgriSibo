@@ -14,7 +14,8 @@ namespace AgriSibo.WebApi.EF
     
     public partial class ApiSecurity
     {
-        public int entityId { get; set; }
+        public int FarmerId { get; set; }
+        public int InvestorId { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
     }

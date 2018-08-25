@@ -12,7 +12,7 @@ namespace AgriSibo.WebApi.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkInvestment
+    public partial class Investment
     {
         public int id { get; set; }
         public int InvestorId { get; set; }

@@ -6,22 +6,22 @@ using System.Web.Http;
 
 namespace AgriSibo.WebApi.Controllers
 {
-    public class WorkInvestmentController : ApiController
+    public class InvestmentController : ApiController
     {
         // GET: api/WorkInvestment
-        public IEnumerable<WorkInvestment> Get()
+        public IEnumerable<Investment> Get()
         {
             return Data
                 .Entities
-                .WorkInvestments;
+                .Investments;
         }
 
         // GET: api/WorkInvestment/5
-        public WorkInvestment Get(int id)
+        public Investment Get(int id)
         {
             return Data
                 .Entities
-                .WorkInvestments
+                .Investments
                 .FirstOrDefault(investment => investment.id == id);
         }
 

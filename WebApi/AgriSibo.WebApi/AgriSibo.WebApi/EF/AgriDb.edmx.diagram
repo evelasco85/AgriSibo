@@ -10,11 +10,9 @@
         <EntityTypeShape EntityType="AgriSiboModel.Farm" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="AgriSiboModel.Farmer" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="AgriSiboModel.FarmersCrop" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.HistoryInvestment" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Investment" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="AgriSiboModel.Investor" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.OpenInvestment" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.Project" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AgriSiboModel.WorkInvestment" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AgriSiboModel.Project" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

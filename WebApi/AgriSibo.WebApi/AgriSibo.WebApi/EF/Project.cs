@@ -21,5 +21,6 @@ namespace AgriSibo.WebApi.EF
         public System.DateTime CommittedDate { get; set; }
         public decimal DefaultReturnRate { get; set; }
         public decimal DefaultReturnAmount { get; set; }
+        public int Status { get; set; }
     }
 }

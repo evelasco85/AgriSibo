@@ -30,10 +30,8 @@ namespace AgriSibo.WebApi.EF
         public virtual DbSet<Farm> Farms { get; set; }
         public virtual DbSet<Farmer> Farmers { get; set; }
         public virtual DbSet<FarmersCrop> FarmersCrops { get; set; }
-        public virtual DbSet<HistoryInvestment> HistoryInvestments { get; set; }
+        public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<Investor> Investors { get; set; }
-        public virtual DbSet<OpenInvestment> OpenInvestments { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<WorkInvestment> WorkInvestments { get; set; }
     }
 }

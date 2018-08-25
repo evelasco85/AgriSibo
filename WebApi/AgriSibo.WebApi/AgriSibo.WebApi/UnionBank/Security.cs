@@ -6,12 +6,24 @@ namespace AgriSibo.WebApi.UnionBank
 {
     public static class Security
     {
-        public static string GetToken(int entityId)
+        public static string GetFarmerToken(int entityId)
         {
             ApiSecurity record = Data
                 .Entities
                 .ApiSecurities
-                .FirstOrDefault(security => security.entityId == entityId);
+                .FirstOrDefault(security => security.FarmerId == entityId);
+
+            if (record == null) return string.Empty;
+
+            return string.Empty;
+        }
+
+        public static string GetInvestorToken(int entityId)
+        {
+            ApiSecurity record = Data
+                .Entities
+                .ApiSecurities
+                .FirstOrDefault(security => security.InvestorId == entityId);
 
             if (record == null) return string.Empty;
 

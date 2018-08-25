@@ -7,9 +7,11 @@
     <Schema Namespace="AgriSiboModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ApiSecurity">
           <Key>
-            <PropertyRef Name="entityId" />
+            <PropertyRef Name="FarmerId" />
+            <PropertyRef Name="InvestorId" />
           </Key>
-          <Property Name="entityId" Type="int" Nullable="false" />
+          <Property Name="FarmerId" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
           <Property Name="AccessToken" Type="char" MaxLength="500" Nullable="false" />
           <Property Name="RefreshToken" Type="char" MaxLength="500" Nullable="false" />
         </EntityType>
@@ -44,7 +46,7 @@
           <Property Name="FarmId" Type="int" Nullable="false" />
           <Property Name="CropId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="HistoryInvestment">
+        <EntityType Name="Investment">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -64,18 +66,6 @@
           <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
           <Property Name="RemainingInvestmentFunds" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
-        <EntityType Name="OpenInvestment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InvestorId" Type="int" Nullable="false" />
-          <Property Name="ProjectId" Type="int" Nullable="false" />
-          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,18 +77,7 @@
           <Property Name="CommittedDate" Type="datetime" Nullable="false" />
           <Property Name="DefaultReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DefaultReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-        </EntityType>
-        <EntityType Name="WorkInvestment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InvestorId" Type="int" Nullable="false" />
-          <Property Name="ProjectId" Type="int" Nullable="false" />
-          <Property Name="InvestedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ExpectedReturnRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ExpectedReturnAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="AcceptedByFarmer" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="AgriSiboModelStoreContainer">
           <EntitySet Name="ApiSecurity" EntityType="Self.ApiSecurity" Schema="dbo" store:Type="Tables" />
@@ -106,11 +85,9 @@
           <EntitySet Name="Farm" EntityType="Self.Farm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Farmer" EntityType="Self.Farmer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FarmersCrop" EntityType="Self.FarmersCrop" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HistoryInvestment" EntityType="Self.HistoryInvestment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investment" EntityType="Self.Investment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Investor" EntityType="Self.Investor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OpenInvestment" EntityType="Self.OpenInvestment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkInvestment" EntityType="Self.WorkInvestment" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -122,17 +99,17 @@
           <EntitySet Name="Farms" EntityType="AgriSiboModel.Farm" />
           <EntitySet Name="Farmers" EntityType="AgriSiboModel.Farmer" />
           <EntitySet Name="FarmersCrops" EntityType="AgriSiboModel.FarmersCrop" />
-          <EntitySet Name="HistoryInvestments" EntityType="AgriSiboModel.HistoryInvestment" />
+          <EntitySet Name="Investments" EntityType="AgriSiboModel.Investment" />
           <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
-          <EntitySet Name="OpenInvestments" EntityType="AgriSiboModel.OpenInvestment" />
           <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
-          <EntitySet Name="WorkInvestments" EntityType="AgriSiboModel.WorkInvestment" />
         </EntityContainer>
         <EntityType Name="ApiSecurity">
           <Key>
-            <PropertyRef Name="entityId" />
+            <PropertyRef Name="FarmerId" />
+            <PropertyRef Name="InvestorId" />
           </Key>
-          <Property Name="entityId" Type="Int32" Nullable="false" />
+          <Property Name="FarmerId" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
           <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
           <Property Name="RefreshToken" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
         </EntityType>
@@ -167,7 +144,7 @@
           <Property Name="FarmId" Type="Int32" Nullable="false" />
           <Property Name="CropId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="HistoryInvestment">
+        <EntityType Name="Investment">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -187,18 +164,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
-        <EntityType Name="OpenInvestment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InvestorId" Type="Int32" Nullable="false" />
-          <Property Name="ProjectId" Type="Int32" Nullable="false" />
-          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
@@ -210,18 +175,7 @@
           <Property Name="CommittedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DefaultReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DefaultReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-        </EntityType>
-        <EntityType Name="WorkInvestment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InvestorId" Type="Int32" Nullable="false" />
-          <Property Name="ProjectId" Type="Int32" Nullable="false" />
-          <Property Name="InvestedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ExpectedReturnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ExpectedReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="AcceptedByFarmer" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -234,7 +188,8 @@
               <MappingFragment StoreEntitySet="ApiSecurity">
                 <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
                 <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
-                <ScalarProperty Name="entityId" ColumnName="entityId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -273,9 +228,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HistoryInvestments">
-            <EntityTypeMapping TypeName="AgriSiboModel.HistoryInvestment">
-              <MappingFragment StoreEntitySet="HistoryInvestment">
+          <EntitySetMapping Name="Investments">
+            <EntityTypeMapping TypeName="AgriSiboModel.Investment">
+              <MappingFragment StoreEntitySet="Investment">
                 <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
                 <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
                 <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
@@ -295,22 +250,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OpenInvestments">
-            <EntityTypeMapping TypeName="AgriSiboModel.OpenInvestment">
-              <MappingFragment StoreEntitySet="OpenInvestment">
-                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
-                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
-                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
-                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="AgriSiboModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DefaultReturnAmount" ColumnName="DefaultReturnAmount" />
                 <ScalarProperty Name="DefaultReturnRate" ColumnName="DefaultReturnRate" />
                 <ScalarProperty Name="CommittedDate" ColumnName="CommittedDate" />
@@ -318,19 +261,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FarmersCropId" ColumnName="FarmersCropId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkInvestments">
-            <EntityTypeMapping TypeName="AgriSiboModel.WorkInvestment">
-              <MappingFragment StoreEntitySet="WorkInvestment">
-                <ScalarProperty Name="AcceptedByFarmer" ColumnName="AcceptedByFarmer" />
-                <ScalarProperty Name="ExpectedReturnAmount" ColumnName="ExpectedReturnAmount" />
-                <ScalarProperty Name="ExpectedReturnRate" ColumnName="ExpectedReturnRate" />
-                <ScalarProperty Name="InvestedAmount" ColumnName="InvestedAmount" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
