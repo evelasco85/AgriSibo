@@ -52,6 +52,14 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="FarmId" Type="int" Nullable="false" />
           <Property Name="CropId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="250" Nullable="false" />
+          <Property Name="RemainingInvestmentFunds" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,6 +74,7 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <EntitySet Name="ApiSecurity" EntityType="Self.ApiSecurity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Farmer" EntityType="Self.Farmer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FarmersCrop" EntityType="Self.FarmersCrop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investor" EntityType="Self.Investor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crop" EntityType="Self.Crop" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -93,6 +102,7 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <EntitySet Name="Projects" EntityType="AgriSiboModel.Project" />
           <EntitySet Name="Crops" EntityType="AgriSiboModel.Crop" />
           <EntitySet Name="Farms" EntityType="AgriSiboModel.Farm" />
+          <EntitySet Name="Investors" EntityType="AgriSiboModel.Investor" />
         </EntityContainer>
         <EntityType Name="ApiSecurity">
           <Key>
@@ -146,6 +156,14 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
           <Property Name="FarmerId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="2000" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="RemainingInvestmentFunds" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -204,6 +222,15 @@ warning 6002: The table/view 'AgriSibo.dbo.Farm' does not have a primary key def
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investors">
+            <EntityTypeMapping TypeName="AgriSiboModel.Investor">
+              <MappingFragment StoreEntitySet="Investor">
+                <ScalarProperty Name="RemainingInvestmentFunds" ColumnName="RemainingInvestmentFunds" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
