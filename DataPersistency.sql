@@ -1,20 +1,4 @@
 /*
---EXEC	[AgriSibo].[dbo].[AddProject]
---		@farmersCropId = 3,
---		@name = 'September Cycle (Durian)',
---		@estimatedBudget = 15000,
---		@committedDate = '2018-12-25',
---		@defaultReturnRate = '0',
---		@defaultReturnAmount = 17500.00
-
---EXEC	[AgriSibo].[dbo].[AddProject]
---		@farmersCropId = 4,
---		@name = 'September Cycle (Cacao)',
---		@estimatedBudget = 8000,
---		@committedDate = '2018-12-25',
---		@defaultReturnRate = 0,
---		@defaultReturnAmount = 12000
-
 EXEC	[AgriSibo].[dbo].SubmitInvestmentApplication
 		@InvestorId = 1,	--Enrico
 		@ProjectId = 17,

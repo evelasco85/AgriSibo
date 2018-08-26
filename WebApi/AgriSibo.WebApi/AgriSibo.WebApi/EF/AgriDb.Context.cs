@@ -62,6 +62,35 @@ namespace AgriSibo.WebApi.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFundsToFarmer", idParameter, fundsToAddParameter);
         }
     
+        public virtual int AddProject(Nullable<int> farmersCropId, string name, Nullable<decimal> estimatedBudget, Nullable<System.DateTime> committedDate, Nullable<decimal> defaultReturnRate, Nullable<decimal> defaultReturnAmount)
+        {
+            var farmersCropIdParameter = farmersCropId.HasValue ?
+                new ObjectParameter("farmersCropId", farmersCropId) :
+                new ObjectParameter("farmersCropId", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var estimatedBudgetParameter = estimatedBudget.HasValue ?
+                new ObjectParameter("estimatedBudget", estimatedBudget) :
+                new ObjectParameter("estimatedBudget", typeof(decimal));
+    
+            var committedDateParameter = committedDate.HasValue ?
+                new ObjectParameter("committedDate", committedDate) :
+                new ObjectParameter("committedDate", typeof(System.DateTime));
+    
+            var defaultReturnRateParameter = defaultReturnRate.HasValue ?
+                new ObjectParameter("defaultReturnRate", defaultReturnRate) :
+                new ObjectParameter("defaultReturnRate", typeof(decimal));
+    
+            var defaultReturnAmountParameter = defaultReturnAmount.HasValue ?
+                new ObjectParameter("defaultReturnAmount", defaultReturnAmount) :
+                new ObjectParameter("defaultReturnAmount", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddProject", farmersCropIdParameter, nameParameter, estimatedBudgetParameter, committedDateParameter, defaultReturnRateParameter, defaultReturnAmountParameter);
+        }
+    
         public virtual int CompleteProject(Nullable<int> projectId)
         {
             var projectIdParameter = projectId.HasValue ?
